@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aevix Scripts</title>
+<meta name="description" content="Aevix Scripts Hub - fast, clean and powerful script hub. Copy the loader and go.">
+<style>
+:root{
+  --bg:#07050f; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.09);
+  --p:#8b5cf6; --c:#22d3ee; --pink:#f472b6; --text:#eceaf7; --mute:#9a96b5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,sans-serif;overflow-x:hidden;line-height:1.6}
+#bg{position:fixed;inset:0;z-index:0}
+.glow{position:fixed;width:520px;height:520px;border-radius:50%;filter:blur(120px);opacity:.28;z-index:0;animation:float 14s ease-in-out infinite}
+.g1{background:var(--p);top:-120px;left:-120px}
+.g2{background:var(--c);bottom:-160px;right:-120px;animation-delay:-7s}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+#cursor{position:fixed;width:300px;height:300px;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(circle,rgba(139,92,246,.18),transparent 65%);transform:translate(-50%,-50%);left:-999px;top:-999px}
+main,header,footer{position:relative;z-index:2}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 6vw;backdrop-filter:blur(14px);background:rgba(7,5,15,.55);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;letter-spacing:.5px;font-size:1.2rem;display:flex;align-items:center;gap:10px}
+.logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--p),var(--c));display:inline-block;
+  animation:spin 8s linear infinite;box-shadow:0 0 18px var(--p)}
+@keyframes spin{to{transform:rotate(360deg)}}
+nav ul{display:flex;gap:26px;list-style:none}
+nav a{color:var(--mute);text-decoration:none;font-size:.92rem;transition:.2s}
+nav a:hover{color:#fff}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 6vw 60px}
+.badge{display:inline-flex;gap:8px;align-items:center;padding:6px 16px;border-radius:99px;border:1px solid var(--line);
+  background:var(--card);font-size:.82rem;color:var(--mute);margin-bottom:26px}
+.dot{width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 #34d399;animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(3rem,10vw,7rem);font-weight:900;line-height:1;letter-spacing:-2px;position:relative;
+  background:linear-gradient(90deg,var(--p),var(--c),var(--pink),var(--p));background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:grad 6s linear infinite}
+@keyframes grad{to{background-position:300% 0}}
+h1.glitch::before,h1.glitch::after{content:attr(data-t);position:absolute;inset:0;background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}
+h1.glitch::before{transform:translate(3px,0);clip-path:inset(0 0 60% 0);opacity:.8;filter:hue-rotate(80deg)}
+h1.glitch::after{transform:translate(-3px,0);clip-path:inset(60% 0 0 0);opacity:.8;filter:hue-rotate(-80deg)}
+.type{margin-top:22px;font-size:clamp(1rem,2.4vw,1.4rem);color:var(--mute);min-height:2em}
+.type b{color:var(--c);font-weight:600}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--c);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;justify-content:center}
+.btn{position:relative;padding:14px 30px;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer;border:1px solid var(--line);
+  color:#fff;background:var(--card);text-decoration:none;transition:.25s;overflow:hidden}
+.btn.main{border:none;background:linear-gradient(135deg,var(--p),#6366f1 50%,var(--c));box-shadow:0 10px 40px -10px var(--p)}
+.btn:hover{transform:translateY(-3px) scale(1.03)}
+.btn.main::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:shine 3.2s infinite}
+@keyframes shine{60%,100%{left:160%}}
+.scroll{margin-top:60px;width:26px;height:42px;border:2px solid var(--line);border-radius:14px;position:relative}
+.scroll::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;border-radius:2px;background:var(--c);transform:translateX(-50%);animation:wheel 1.6s infinite}
+@keyframes wheel{to{top:24px;opacity:0}}
+section{padding:90px 6vw;max-width:1180px;margin:auto}
+.title{text-align:center;margin-bottom:50px}
+.title h2{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800}
+.title p{color:var(--mute);margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.stat{padding:28px;border-radius:20px;background:var(--card);border:1px solid var(--line);text-align:center}
+.stat strong{font-size:2.6rem;font-weight:800;background:linear-gradient(90deg,var(--p),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{display:block;color:var(--mute);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{position:relative;padding:30px;border-radius:22px;background:var(--card);border:1px solid var(--line);transition:.3s;overflow:hidden;transform-style:preserve-3d}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(139,92,246,.22),transparent 45%);opacity:0;transition:.3s}
+.card:hover::before{opacity:1}
+.card:hover{border-color:rgba(139,92,246,.5)}
+.ic{font-size:2rem;margin-bottom:14px;display:inline-block;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.card h3{font-size:1.2rem;margin-bottom:6px}
+.card p{color:var(--mute);font-size:.95rem}
+.loader{max-width:760px;margin:auto;padding:2px;border-radius:24px;background:conic-gradient(from var(--a,0deg),var(--p),var(--c),var(--pink),var(--p));animation:rot 5s linear infinite}
+@property --a{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes rot{to{--a:360deg}}
+.loader-in{background:#0b0818;border-radius:22px;padding:30px}
+.bar{display:flex;gap:7px;margin-bottom:16px}
+.bar span{width:12px;height:12px;border-radius:50%}
+.bar span:nth-child(1){background:#ff5f57}.bar span:nth-child(2){background:#febc2e}.bar span:nth-child(3){background:#28c840}
+pre{background:#05030c;border:1px solid var(--line);border-radius:14px;padding:18px;color:#c4b5fd;font-family:Consolas,Menlo,monospace;
+  font-size:.9rem;white-space:pre-wrap;word-break:break-all;user-select:all}
+pre .k{color:var(--c)}pre .s{color:#f9a8d4}
+.loader .btn{margin-top:18px;width:100%}
+.steps{counter-reset:s;display:grid;gap:14px;max-width:760px;margin:auto}
+.step{counter-increment:s;display:flex;gap:18px;align-items:center;padding:20px 24px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.step::before{content:counter(s);flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--p),var(--c))}
+details{max-width:760px;margin:0 auto 12px;padding:18px 24px;border-radius:16px;background:var(--card);border:1px solid var(--line);cursor:pointer}
+summary{font-weight:600;list-style:none}
+summary::after{content:"+";float:right;color:var(--c);transition:.3s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--mute);margin-top:10px}
+footer{text-align:center;padding:50px 6vw 40px;color:var(--mute);border-top:1px solid var(--line);font-size:.9rem}
+.rv{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+#toast{position:fixed;bottom:30px;left:50%;transform:translate(-50%,120px);padding:14px 26px;border-radius:14px;background:#10b981;color:#fff;font-weight:700;z-index:50;transition:.4s}
+#toast.show{transform:translate(-50%,0)}
+@media(max-width:700px){nav ul{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="glow g1"></div><div class="glow g2"></div><div id="cursor"></div>
+
+<nav>
+  <div class="logo"><i></i>Aevix Scripts</div>
+  <ul><li><a href="#features">Features</a></li><li><a href="#loader">Loader</a></li><li><a href="#how">How to use</a></li><li><a href="#faq">FAQ</a></li></ul>
+</nav>
+
+<header class="hero">
+  <div class="badge"><span class="dot"></span> Hub online &bull; Updated regularly</div>
+  <h1 class="glitch" data-t="AEVIX SCRIPTS" id="h1">AEVIX SCRIPTS</h1>
+  <p class="type"><span id="typed"></span><span class="caret"></span></p>
+  <div class="cta">
+    <a href="#loader" class="btn main">Get the Script</a>
+    <a href="#features" class="btn">Explore Features</a>
+  </div>
+  <div class="scroll"></div>
+</header>
+
+<main>
+  <section>
+    <div class="stats rv">
+      <div class="stat"><strong data-n="10000" data-s="+">0</strong><span>Executions</span></div>
+      <div class="stat"><strong data-n="99" data-s="%">0</strong><span>Uptime</span></div>
+      <div class="stat"><strong data-n="50" data-s="+">0</strong><span>Features</span></div>
+      <div class="stat"><strong data-n="24" data-s="/7">0</strong><span>Updates</span></div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="title rv"><h2>Built different</h2><p>Everything you need, packed into a single loader.</p></div>
+    <div class="grid">
+      <div class="card rv"><div class="ic">⚡</div><h3>Lightning Fast</h3><p>Optimized code that loads in seconds with zero lag.</p></div>
+      <div class="card rv"><div class="ic">🎨</div><h3>Clean Interface</h3><p>A smooth, modern GUI that is easy to use for everyone.</p></div>
+      <div class="card rv"><div class="ic">🔄</div><h3>Always Updated</h3><p>The loader pulls the latest version every time you run it.</p></div>
+      <div class="card rv"><div class="ic">🧩</div><h3>Many Games</h3><p>Support for a growing list of popular games and features.</p></div>
+      <div class="card rv"><div class="ic">🛠️</div><h3>Customizable</h3><p>Tweak settings, keybinds and themes to fit your style.</p></div>
+      <div class="card rv"><div class="ic">🆓</div><h3>Free to Use</h3><p>No keys, no paywalls. Copy, paste and execute.</p></div>
+    </div>
+  </section>
+
+  <section id="loader">
+    <div class="title rv"><h2>Get the loader</h2><p>Copy the script below and run it in your executor.</p></div>
+    <div class="loader rv"><div class="loader-in">
+      <div class="bar"><span></span><span></span><span></span></div>
+      <pre id="code"><span class="k">loadstring</span>(game:<span class="k">HttpGet</span>(<span class="s">"https://raw.githubusercontent.com/aevixscripts/Hub/refs/heads/main/aevix%20scripts%20hub.lua"</span>))()</pre>
+      <button class="btn main" id="copy">📋 Copy Script</button>
+    </div></div>
+  </section>
+
+  <section id="how">
+    <div class="title rv"><h2>How to use</h2><p>Up and running in three steps.</p></div>
+    <div class="steps">
+      <div class="step rv">Open your executor and join your game.</div>
+      <div class="step rv">Click <b>&nbsp;Copy Script&nbsp;</b> above and paste it into the executor.</div>
+      <div class="step rv">Press execute and enjoy the Aevix hub.</div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="title rv"><h2>FAQ</h2></div>
+    <details class="rv"><summary>Is it free?</summary><p>Yes, the script is free to use with no key system.</p></details>
+    <details class="rv"><summary>The script is not loading, what do I do?</summary><p>Make sure your executor supports HttpGet and loadstring, then re-execute.</p></details>
+    <details class="rv"><summary>How often is it updated?</summary><p>The loader fetches the latest version automatically each time you run it.</p></details>
+  </section>
+</main>
+
+<footer>© <span id="y"></span> Aevix Scripts. Not affiliated with Roblox Corporation. Use at your own risk.</footer>
+<div id="toast">Copied to clipboard ✔</div>
+
+<script>
+// particles
+const cv=document.getElementById('bg'),cx=cv.getContext('2d');let W,H,P=[],m={x:null,y:null};
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;P=Array.from({length:Math.min(110,W/12|0)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*1.8+.6}))}
+addEventListener('resize',rs);rs();
+addEventListener('mousemove',e=>{m.x=e.clientX;m.y=e.clientY;const c=document.getElementById('cursor');c.style.left=e.clientX+'px';c.style.top=e.clientY+'px'});
+(function loop(){cx.clearRect(0,0,W,H);
+ for(const p of P){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+  if(m.x){const dx=p.x-m.x,dy=p.y-m.y,d=Math.hypot(dx,dy);if(d<120){p.x+=dx/d*1.2;p.y+=dy/d*1.2}}
+  cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.28);cx.fillStyle='rgba(167,139,250,.8)';cx.fill()}
+ for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const d=Math.hypot(P[i].x-P[j].x,P[i].y-P[j].y);
+  if(d<120){cx.strokeStyle='rgba(139,92,246,'+(.25*(1-d/120))+')';cx.beginPath();cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[j].x,P[j].y);cx.stroke()}}
+ requestAnimationFrame(loop)})();
+
+// typewriter
+const words=['The <b>fastest</b> script hub.','Clean. Powerful. <b>Free.</b>','One loader. <b>Endless</b> features.'];
+let wi=0,ci=0,del=false;const t=document.getElementById('typed');
+(function type(){const w=words[wi].replace(/<[^>]+>/g,''),full=words[wi];
+ ci+=del?-1:1;let shown=0,out='',inTag=false;
+ for(let k=0;k<full.length&&shown<ci;k++){out+=full[k];if(full[k]=='<')inTag=true;if(!inTag)shown++;if(full[k]=='>')inTag=false}
+ t.innerHTML=out;let sp=del?30:60;
+ if(!del&&ci>=w.length){del=true;sp=1600}else if(del&&ci<=0){del=false;wi=(wi+1)%words.length;sp=300}
+ setTimeout(type,sp)})();
+
+// glitch burst
+const h1=document.getElementById('h1');
+setInterval(()=>{h1.classList.add('glitch');setTimeout(()=>h1.classList.remove('glitch'),260)},3500);
+
+// reveal + counters
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');
+ e.target.querySelectorAll('[data-n]').forEach(c=>{const n=+c.dataset.n,s=c.dataset.s||'';let v=0;const st=n/60;
+  const id=setInterval(()=>{v+=st;if(v>=n){v=n;clearInterval(id)}c.textContent=Math.floor(v).toLocaleString()+s},25)});io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%3)*.1+'s';io.observe(el)});
+
+// card spotlight + tilt
+document.querySelectorAll('.card').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+ c.style.setProperty('--mx',x+'px');c.style.setProperty('--my',y+'px');
+ c.style.transform='perspective(700px) rotateX('+((y/r.height-.5)*-8)+'deg) rotateY('+((x/r.width-.5)*8)+'deg) translateY(-4px)'});
+ c.addEventListener('mouseleave',()=>c.style.transform='')});
+
+// copy
+const SCRIPT='loadstring(game:HttpGet("https://raw.githubusercontent.com/aevixscripts/Hub/refs/heads/main/aevix%20scripts%20hub.lua"))()';
+document.getElementById('copy').onclick=async()=>{
+ try{await navigator.clipboard.writeText(SCRIPT)}catch(e){const r=document.createRange();r.selectNode(document.getElementById('code'));getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy')}
+ const to=document.getElementById('toast');to.classList.add('show');setTimeout(()=>to.classList.remove('show'),2000)};
+document.getElementById('y').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
